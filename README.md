@@ -120,7 +120,7 @@ const App = () => {
 }
 ```
 
---
+---
 
 ```jsx
 import React, { Fragment } from "react";
