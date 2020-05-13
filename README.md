@@ -131,7 +131,7 @@ const App = () => {
     
     return (
         <Fragment>
-            { isMobileScreen && <span>Will display on a screen with a min-width of 600px</span> }
+            { isMobileScreen && <span>Will display on a screen with a max-width of 599px</span> }
         </Fragment>
     )
 }
