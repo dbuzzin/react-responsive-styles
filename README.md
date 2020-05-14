@@ -65,7 +65,7 @@ const screenWidth = setBreakpoints({
 
 const MobileScreen = screenWidth.isAtMost("mobile");
 const TabletScreenPort = screenWidth.isAtLeast("tabletPortait");
-const TabletScreenLand = screenWidth.isAtMost("tabletLandscape");
+const TabletScreenLand = screenWidth.isAtLeast("tabletLandscape");
 const DesktopScreen = screenWidth.isBetween("desktop", "tv");
 
 const App = () => {
