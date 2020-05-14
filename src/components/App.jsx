@@ -1,34 +1,12 @@
 import React, { Fragment } from "react";
-import { Media, newStyle, useResponsiveStyle, useMediaQuery } from "../react-responsive-styles";
-
-import "../css/main.css";
-
-const style = newStyle({
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "200px", 
-    width: "200px",
-    fontFamily: "Arial, sans-serif",
-    fontWeight: 700,
-    color: "#ffffff"
-});
-
-style.addMediaQuery("(min-width: 600px)", {
-    backgroundColor: "black"
-})
-
-style.addMediaQuery("(min-width: 900px)", {
-    backgroundColor: "blue",
-    color: "black"
-})
-
+import { useMediaQuery } from "../lib/react-responsive-styles";
 
 const App = () => {
-    const testStyle = useResponsiveStyle(style);
+    const isMobileScreen = useMediaQuery("screen and (max-width: 599px)");
+    
     return (
         <Fragment>
-            <span style={testStyle}>Min Width: 600px</span>
+            { isMobileScreen && <span>Will display on a screen with a max-width of 599px</span> }
         </Fragment>
     )
 }
