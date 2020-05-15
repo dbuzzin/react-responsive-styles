@@ -1,3 +1,21 @@
+/**
+ * Capitalises the first letter of a string only.
+ * 
+ * @param {string} str - A string which needs to have the first letter capitalised.
+ * @returns {string} - The input string with the first character capitalised.
+ */
+
+export const capitaliseFirstChar = (str) => {
+    return str.replace(/^[a-z_$]/, (match) => match.toUpperCase());
+}
+
+/**
+ * Takes in a props object and converts the key, value pairs into a media query string.
+ * 
+ * @param {Object} props - An object containing media query features and values. Feature expressions are declared in camelCase.
+ * @returns {string} - A media query as a string e.g. "screen and (min-width: 600px)".
+ */
+
 export const convertPropsToQuery = (props) => {
     const arr = [];
     const obj = Object.assign({}, props);

@@ -51,22 +51,81 @@ const App = () => {
 
 ---
 
-```jsx
+```jsx 
 import React, { Fragment } from "react";
-import { setBreakpoints } from "react-responsive-styles";
+import { setBreakpoints } from "../lib/react-responsive-styles";
 
-const screenWidth = setBreakpoints({
-    mobile: 599,
-    tabletPortrait: 600,
-    tabletLandscape: 900,
-    desktop: 1200,
-    tv: 3000
+const breakpoints = setBreakpoints({
+    mobileScreen: {
+       maxWidth: "599px" 
+    },
+    tabletPortScreen: {
+        minWidth: "600px",
+        maxWidth: "900px" 
+     },
+     tabletLandScreen: {
+        minWidth: "900px"
+     },
+     desktopScreen: {
+        minWidth: "1200px"
+     },
 });
 
-const MobileScreen = screenWidth.isAtMost("mobile");
-const TabletScreenPort = screenWidth.isAtLeast("tabletPortait");
-const TabletScreenLand = screenWidth.isAtLeast("tabletLandscape");
-const DesktopScreen = screenWidth.isBetween("desktop", "tv");
+const App = () => {
+    const { MobileScreen, TabletPortScreen, TabletLandScreen, DesktopScreen } = breakpoints;
+    
+    return (
+        <Fragment>
+        
+            <MobileScreen>
+                <span>Mobile Screen</span>
+            </MobileScreen>
+
+            <TabletPortScreen>
+                <span>Tablet Portrait Screen</span>
+            </TabletPortScreen>
+
+            <TabletLandScreen>
+                <span>Tablet Landscape Screen</span>
+            </TabletLandScreen>
+
+            <DesktopScreen>
+                <span>Desktop Screen</span>
+            </DesktopScreen>
+            
+        </Fragment>
+    )
+}
+
+```
+
+```jsx
+import { setBreakpoints } from "react-responsive-styles";
+
+const breakpoints = setBreakpoints({
+    mobileScreen: {
+       maxWidth: "599px" 
+    },
+    tabletPortScreen: {
+        minWidth: "600px",
+        maxWidth: "900px" 
+     },
+     tabletLandScreen: {
+        minWidth: "900px"
+     },
+     desktopScreen: {
+        minWidth: "1200px"
+     },
+});
+
+export const { MobileScreen, TabletPortScreen, TabletLandScreen, DesktopScreen } = breakpoints;
+
+```
+
+```jsx
+import React, { Fragment } from "react";
+import { MobileScreen, TabletPortScreen, TabletLandScreen, DesktopScreen } from "./breakpoints";
+
 
 const App = () => {
     return (
@@ -75,15 +134,15 @@ const App = () => {
             <MobileScreen>
                 <span>Mobile Screen</span>
             </MobileScreen>
-            
-            <TabletScreenPort>
-                <span>Tablet Portait Screen</span>
-            </TabletScreenPort>
-            
-            <TabletScreenLand>
+
+            <TabletPortScreen>
+                <span>Tablet Portrait Screen</span>
+            </TabletPortScreen>
+
+            <TabletLandScreen>
                 <span>Tablet Landscape Screen</span>
-            </TabletScreenLand>
-            
+            </TabletLandScreen>
+
             <DesktopScreen>
                 <span>Desktop Screen</span>
             </DesktopScreen>
@@ -91,6 +150,8 @@ const App = () => {
         </Fragment>
     )
 }
+
+export default App;
 ```
 
 ---

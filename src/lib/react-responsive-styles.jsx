@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { convertPropsToQuery } from "./helpers";
+import { capitaliseFirstChar, convertPropsToQuery } from "./helpers";
 import checkError from "./errors";
 
 class ReactStyle {
@@ -93,7 +93,27 @@ const mediaQuery = (() => {
     }
 })();
 
-const setBreakpoints = (breakpoints = {}) => {
+/**
+ * Converts an objects properties into responsive components based on their values.
+ * 
+ * @param {Object} breakpoints - Object containing breakpoints defined by media queries.
+ */
+
+const setBreakpoints = (breakpoints) => {
+    if (typeof breakpoints !== "object") {
+        throw new Error("setBreakpoints() must be passed an object.");
+    }
+    const extractBreakpoints = (breakpoints) => {
+        const obj = {};
+    
+        for (let [key, val] of Object.entries(breakpoints)) {
+            Object.assign(obj, {
+                [capitaliseFirstChar(key)]: breakpointQuery(convertPropsToQuery(val))
+            });
+        }
+    
+        return obj;
+    }
     const breakpointQuery = (queryString) => {
         return function BreakpointWrapper({children}) {
             const show = useMediaQuery(queryString, "screen");
@@ -103,11 +123,7 @@ const setBreakpoints = (breakpoints = {}) => {
                 : null;
         }
     }
-    return {
-        isAtLeast: (...args) => checkError("breakpoints", {args, breakpoints}, breakpointQuery(`(min-width: ${breakpoints[args[0]]}px)`)),
-        isAtMost: (...args) => checkError("breakpoints", {args, breakpoints}, breakpointQuery(`(max-width: ${breakpoints[args[0]]}px)`)),
-        isBetween: (...args) => checkError("breakpoints", {args, breakpoints}, breakpointQuery(`(min-width: ${breakpoints[args[0]]}px) and (max-width: ${breakpoints[args[1]]}px)`)),
-    }
+    return extractBreakpoints(breakpoints);
 }
 
 export const { newStyle } = ReactStyle;

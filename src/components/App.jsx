@@ -1,22 +1,26 @@
 import React, { Fragment } from "react";
-import { Media } from "../lib/react-responsive-styles";
+import { MobileScreen, TabletPortScreen, TabletLandScreen, DesktopScreen } from "./test"
 
 const App = () => {
     return (
         <Fragment>
+        
+            <MobileScreen>
+                <span>Mobile Screen</span>
+            </MobileScreen>
 
-            <Media type="screen" minWidth="600px"> 
-                <span>Will display on a screen with a min-width of 600px</span>
-            </Media>
+            <TabletPortScreen>
+                <span>Tablet Portrait Screen</span>
+            </TabletPortScreen>
 
-            <Media aspectRatio="16/10" orientation="landscape">
-                <span>Will Display on a landscape screen with an aspect ration of 16:10</span>
-            </Media>
+            <TabletLandScreen>
+                <span>Tablet Landscape Screen</span>
+            </TabletLandScreen>
 
-            <Media query="screen and (min-resolution: 300dpi)">
-                <span>Will display if the screen resolution is at least 300dpi</span>
-            </Media>
-
+            <DesktopScreen>
+                <span>Desktop Screen</span>
+            </DesktopScreen>
+            
         </Fragment>
     )
 }

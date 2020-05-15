@@ -13,4 +13,10 @@ const checkError = (caller, params, callback) => {
     }
 }
 
+// export const checkType = (arg, type) => {
+//     if (typeof arg !== type) {
+//         throw new Error("");
+//     }
+// }
+
 export default checkError;
