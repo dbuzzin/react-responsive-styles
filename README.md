@@ -103,7 +103,7 @@ const App = () => {
     return (
         <Fragment>
 
-            <Media type="screen" minWidth={600}> 
+            <Media type="screen" minWidth="600px"> 
                 <span>Will display on a screen with a min-width of 600px</span>
             </Media>
 
