@@ -2,6 +2,13 @@ import React, { Fragment, useState, useEffect } from "react";
 import { capitaliseFirstChar, convertPropsToQuery } from "./helpers";
 import checkError from "./errors";
 
+/**
+ * Class constructor for the responsive style objects.
+ * 
+ * @param {Object} style - An object containing styles.
+ * @private
+ */
+
 class ReactStyle {
     constructor (style) {
         this.originalStyle = style;
@@ -9,9 +16,40 @@ class ReactStyle {
         this.mediaQueries = [];
     }
 
+    /**
+     * Creates a new style object.
+     * 
+     * Example...
+     * 
+     *      const style = newStyle({
+     *          height: "200px",
+     *          width: "200px",
+     *          color: "#ffffff"
+     *      });
+     * 
+     * @param {Object} style - An object containing the default component styles
+     * @returns {Object} - An object containing the style information.
+     * @public
+     */
+
     static newStyle(style) {
         return new ReactStyle(style);
     }
+
+    /**
+     * Creates a style object to be assigned to the original style based on the media query.
+     * 
+     * Example...
+     * 
+     *      style.addMediaQuery("(min-width: 600px)", {         - The media query which wnen  true will assign the styles to the original.
+     *          backgroundColor: "black",
+     *          height: "300px"
+     *      });
+     * 
+     * @param {string} queryString - The media query, which when true the styles will be applied.
+     * @param {Object} style - An object containing styles to be applied when the media query returns true.
+     * @public
+     */
 
     addMediaQuery(queryString, style) {
         const query = matchMedia(queryString);
@@ -19,6 +57,12 @@ class ReactStyle {
         this.mediaQueries.push({ query, style });
         this.updateOutput();
     }
+
+    /**
+     * Updates the style which will be used by the component.
+     * 
+     * @private
+     */
 
     updateOutput() {
         let output = {};
@@ -32,6 +76,14 @@ class ReactStyle {
         this.outputStyle = Object.assign({}, {...this.originalStyle, ...output});
     }
 }
+
+/**
+ * A hook which lets a component use responsive styles.
+ * 
+ * @param {Object} style - A style object created with newStyle().
+ * @returns {Object} - An object containing styles depending the associated media queries.
+ * @public
+ */
 
 const useResponsiveStyle = (style) => {
 
@@ -66,6 +118,14 @@ const useResponsiveStyle = (style) => {
     return output;
 }
 
+/**
+ * A hook which lets you pass a media query and recieve a boolean value as a response.
+ * 
+ * @param {string} queryString - A string containing media queries.
+ * @returns {boolean} - Returns whether the media query passed returns true or false.
+ * @public
+ */
+
 const useMediaQuery = (queryString) => {
     const [query, setQuery] = useState(window.matchMedia(queryString));
 
@@ -83,6 +143,12 @@ const useMediaQuery = (queryString) => {
     return query.matches
 }
 
+/**
+ * Creates a component which will only be visible if the media query passed through props return true
+ * 
+ * @public
+ */
+
 const mediaQuery = (() => {
     return function MediaQueryWrapper(props) {
         const show = useMediaQuery(`${props.query || convertPropsToQuery(props)}`);
@@ -96,13 +162,31 @@ const mediaQuery = (() => {
 /**
  * Converts an objects properties into responsive components based on their values.
  * 
+ * Example...
+ * 
+ *      const breakpoints = setBreakpoints({
+ *          tabletPortScreen: {
+ *              minWidth: "600px",      - The property and value specified will be converted to a media query e.g. (min-width: 600px)
+ *              maxWidth: "900px"
+ *          },
+ *      });
+ * 
  * @param {Object} breakpoints - Object containing breakpoints defined by media queries.
+ * @returns {Object} - An object containing responsive components created from the properties attached to "breakpoints"
+ * @public
  */
 
 const setBreakpoints = (breakpoints) => {
     if (typeof breakpoints !== "object") {
         throw new Error("setBreakpoints() must be passed an object.");
     }
+
+    /**
+     * Takes the breakpoints object and converts it into another object of components using the properties and values atttached.
+     * 
+     * @param {Object} breakpoints - Object containing breakpoints defined by media queries.
+     */
+
     const extractBreakpoints = (breakpoints) => {
         const obj = {};
     
@@ -114,6 +198,13 @@ const setBreakpoints = (breakpoints) => {
     
         return obj;
     }
+
+    /**
+     * Creates a component which is only visible if the media query passed to it returns true.
+     * 
+     * @param {string} queryString - A string containing media queries.
+     */
+
     const breakpointQuery = (queryString) => {
         return function BreakpointWrapper({children}) {
             const show = useMediaQuery(queryString, "screen");
