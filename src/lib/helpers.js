@@ -1,16 +1,29 @@
 export const convertPropsToQuery = (props) => {
     const arr = [];
+    const obj = Object.assign({}, props);
 
-    for (let [key, val] of Object.entries(props)) {
+    delete obj.children;
+
+    for (let [key, val] of Object.entries(obj)) {
         const regex = /[A-Z]/g;
 
-        if (regex.test(key)) {
-            let newKey = key.replace(regex, "-$&").toLowerCase();
+        if (key === "type") {
+            arr.push(val);
 
-            arr.push(`(${newKey}: ${val}${typeof val === "number" ? "px" : ""})`);
+            continue;
         }
-        else if (key !== "children" && key !== "type") {
-            arr.push(`(${key}: ${val}${typeof val === "number" ? "px" : ""})`);
+        if (regex.test(key)) {
+            let newKey = key.replace(regex, "-$&").toLowerCase();  
+
+            arr.push(`(${newKey}: ${val})`);
+
+            continue;
+        }
+        if (val === true || val === "all") {
+            arr.push(`(${key})`);
+        }
+        else {
+            arr.push(`(${key}: ${val})`);
         }
     }
 

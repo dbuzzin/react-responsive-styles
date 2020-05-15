@@ -85,7 +85,7 @@ const useMediaQuery = (queryString) => {
 
 const mediaQuery = (() => {
     return function MediaQueryWrapper(props) {
-        const show = useMediaQuery(`${!props.query && props.type ? props.type + " and " : ""}${props.query || convertPropsToQuery(props)}`);
+        const show = useMediaQuery(`${props.query || convertPropsToQuery(props)}`);
 
         return show 
             ? <Fragment>{ props.children }</Fragment>

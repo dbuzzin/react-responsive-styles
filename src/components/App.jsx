@@ -1,12 +1,22 @@
 import React, { Fragment } from "react";
-import { useMediaQuery } from "../lib/react-responsive-styles";
+import { Media } from "../lib/react-responsive-styles";
 
 const App = () => {
-    const isMobileScreen = useMediaQuery("screen and (max-width: 599px)");
-    
     return (
         <Fragment>
-            { isMobileScreen && <span>Will display on a screen with a max-width of 599px</span> }
+
+            <Media type="screen" minWidth="600px"> 
+                <span>Will display on a screen with a min-width of 600px</span>
+            </Media>
+
+            <Media aspectRatio="16/10" orientation="landscape">
+                <span>Will Display on a landscape screen with an aspect ration of 16:10</span>
+            </Media>
+
+            <Media query="screen and (min-resolution: 300dpi)">
+                <span>Will display if the screen resolution is at least 300dpi</span>
+            </Media>
+
         </Fragment>
     )
 }
