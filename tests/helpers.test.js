@@ -1,6 +1,4 @@
-import React from "react";
-import { mount } from "jest";
-import { convertPropsToQuery } from "../lib/helpers";
+import { convertPropsToQuery } from "../src/lib/helpers";
 
 describe("Helper Functions", () => {
     describe("convertPropsToQuery", () => {

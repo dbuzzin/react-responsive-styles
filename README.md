@@ -5,6 +5,33 @@ A set of five utilities and hooks for working with media queries and responsive 
 How to use
 ----------
 
+### Media Queries 
+
+Any time a media query is required, both a string or an object containing media query features in camel-case can be used...
+
+```javascript
+
+const isMobile = useMediaQuery("screen and (max-width: 599px)");
+
+```
+
+or
+
+```javascript
+
+const isMobile = useMediaQuery({
+    type: "screen",
+    maxWidth: "599px"
+});
+
+```
+
+### Create a responsive style object
+
+Use the newStyle API to create responsive style objects and the addMediaQuery method to specify which styles will be changed when the supplied media query returns true. The style object can then be passed into the useResponsiveStyle hook which will update the style and re-render the component for any query that returns true.
+
+###[Demo](https://dbuzzin.github.io/react-responsive-styles/demo01.html)
+
 ```jsx
 import React, { Fragment } from "react";
 import { newStyle, useResponsiveStyle } from "react-responsive-styles";
@@ -31,7 +58,7 @@ style.addMediaQuery("(min-width: 600px)", {
     height: "300px"
 });
 
-style.addMediaQuery("(min-width: 900px)", {
+style.addMediaQuery({ minWidth: "900px" }, {
     backgroundColor: "blue",
     height: "200px",
     color: "black"
@@ -51,53 +78,11 @@ const App = () => {
 
 ---
 
-```jsx 
-import React, { Fragment } from "react";
-import { setBreakpoints } from "../lib/react-responsive-styles";
+### Create specific breakpoint components
 
-const breakpoints = setBreakpoints({
-    mobileScreen: {
-       maxWidth: "599px" 
-    },
-    tabletPortScreen: {
-        minWidth: "600px",
-        maxWidth: "900px" 
-     },
-     tabletLandScreen: {
-        minWidth: "900px"
-     },
-     desktopScreen: {
-        minWidth: "1200px"
-     },
-});
+Each of the top level properties in the object passed to setBreakpoints will be converted into a react component and returned. A handy use case would be to declare the breakpoints in one file like this...
 
-const App = () => {
-    const { MobileScreen, TabletPortScreen, TabletLandScreen, DesktopScreen } = breakpoints;
-    
-    return (
-        <Fragment>
-        
-            <MobileScreen>
-                <span>Mobile Screen</span>
-            </MobileScreen>
-
-            <TabletPortScreen>
-                <span>Tablet Portrait Screen</span>
-            </TabletPortScreen>
-
-            <TabletLandScreen>
-                <span>Tablet Landscape Screen</span>
-            </TabletLandScreen>
-
-            <DesktopScreen>
-                <span>Desktop Screen</span>
-            </DesktopScreen>
-            
-        </Fragment>
-    )
-}
-
-```
+#### breakpoints.js
 
 ```jsx
 import { setBreakpoints } from "react-responsive-styles";
@@ -121,6 +106,10 @@ const breakpoints = setBreakpoints({
 export const { MobileScreen, TabletPortScreen, TabletLandScreen, DesktopScreen } = breakpoints;
 
 ```
+
+The object containing the components is destructred in "breakpoins.js" which makes it a bit smoother when importing the reusable components to another file.
+
+#### App.js
 
 ```jsx
 import React, { Fragment } from "react";

@@ -3,6 +3,7 @@
  * 
  * @param {string} str - A string which needs to have the first letter capitalised.
  * @returns {string} - The input string with the first character capitalised.
+ * @private
  */
 
 export const capitaliseFirstChar = (str) => {
@@ -14,6 +15,7 @@ export const capitaliseFirstChar = (str) => {
  * 
  * @param {Object} props - An object containing media query features and values. Feature expressions are declared in camelCase.
  * @returns {string} - A media query as a string e.g. "screen and (min-width: 600px)".
+ * @private
  */
 
 export const convertPropsToQuery = (props) => {
