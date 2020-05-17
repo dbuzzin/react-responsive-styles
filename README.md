@@ -5,27 +5,6 @@ A set of five utilities and hooks for working with media queries and responsive 
 How to use
 ----------
 
-### Media Queries 
-
-Depending on your preference, any time a media query is required, both a standard media query string or an object containing media query features in camel-case can be used...
-
-```javascript
-
-const isMobile = useMediaQuery("screen and (max-width: 599px)");
-
-```
-
-or
-
-```javascript
-
-const isMobile = useMediaQuery({
-    type: "screen",
-    maxWidth: "599px"
-});
-
-```
-
 ### Create a responsive style object
 
 Use the newStyle API to create responsive style objects and the addMediaQuery method to specify which styles will be changed when the supplied media query returns true. The style object can then be passed into the useResponsiveStyle hook which will update the style and re-render the component for any query that returns true.
@@ -111,7 +90,7 @@ export const { MobileScreen, TabletPortScreen, TabletLandScreen, DesktopScreen }
 
 ```
 
-The object containing the components is destructred when exported from "breakpoins.js" which makes it a bit smoother when importing the reusable components to another file.
+The object containing the components is destructred when exported from "breakpoint.js" which makes it a bit smoother when importing the reusable components to another file.
 
 #### App.js
 
@@ -176,6 +155,10 @@ const App = () => {
 
 ---
 
+### Return true or false from hook
+
+You can simply use the useMediaQuery hook to return true or false from the supplied query.
+
 ```jsx
 import React, { Fragment } from "react";
 import { useMediaQuery } from "react-responsive-styles";
@@ -189,4 +172,27 @@ const App = () => {
         </Fragment>
     )
 }
+```
+
+---
+
+### Media Queries 
+
+Depending on your preference, any time a media query is required, both a standard media query string or an object containing media query features in camel-case can be used...
+
+```javascript
+
+const isMobile = useMediaQuery("screen and (max-width: 599px)");
+
+```
+
+or
+
+```javascript
+
+const isMobile = useMediaQuery({
+    type: "screen",
+    maxWidth: "599px"
+});
+
 ```
