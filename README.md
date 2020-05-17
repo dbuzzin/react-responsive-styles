@@ -128,6 +128,10 @@ export default App;
 
 ---
 
+### More control
+
+If you don't want to set the breakpoints globally, you can use the Media component to create media queries on an individual basis. The queries can either be passed in as their own props, or passed to a query prop as a string or and object.
+
 ```jsx
 import React, { Fragment } from "react";
 import { Media } from "react-responsive-styles";
