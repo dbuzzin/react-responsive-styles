@@ -84,6 +84,8 @@ const App = () => {
 
 Each of the top level properties in the object passed to setBreakpoints will be converted into a react component and returned. A handy use case would be to declare the breakpoints in one file like this...
 
+### [Demo](https://dbuzzin.github.io/react-responsive-styles/demo02.html)
+
 #### breakpoints.js
 
 ```jsx
