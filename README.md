@@ -30,7 +30,7 @@ const isMobile = useMediaQuery({
 
 Use the newStyle API to create responsive style objects and the addMediaQuery method to specify which styles will be changed when the supplied media query returns true. The style object can then be passed into the useResponsiveStyle hook which will update the style and re-render the component for any query that returns true.
 
-###[Demo](https://dbuzzin.github.io/react-responsive-styles/demo01.html)
+### [Demo](https://dbuzzin.github.io/react-responsive-styles/demo01.html)
 
 ```jsx
 import React, { Fragment } from "react";
@@ -107,7 +107,7 @@ export const { MobileScreen, TabletPortScreen, TabletLandScreen, DesktopScreen }
 
 ```
 
-The object containing the components is destructred in "breakpoins.js" which makes it a bit smoother when importing the reusable components to another file.
+The object containing the components is destructred when exported from "breakpoins.js" which makes it a bit smoother when importing the reusable components to another file.
 
 #### App.js
 
