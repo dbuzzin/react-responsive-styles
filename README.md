@@ -7,7 +7,7 @@ How to use
 
 ### Media Queries 
 
-Any time a media query is required, both a string or an object containing media query features in camel-case can be used...
+Any time a media query is required, both a standard media query string or an object containing media query features in camel-case can be used...
 
 ```javascript
 
