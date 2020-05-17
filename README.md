@@ -58,6 +58,8 @@ style.addMediaQuery("(min-width: 600px)", {
     height: "300px"
 });
 
+// Both a string or an object can be passed in place of a media query...
+
 style.addMediaQuery({ minWidth: "900px" }, {
     backgroundColor: "blue",
     height: "200px",
