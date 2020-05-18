@@ -7,7 +7,7 @@ How to use
 
 ### Create a responsive style object
 
-Use the newStyle API to create responsive style objects and the addMediaQuery method to specify which styles will be changed when the supplied media query returns true. The style object can then be passed into the useResponsiveStyle hook which will update the style and re-render the component for any query that returns true.
+Use newStyle to create responsive style objects and the addMediaQuery method to specify which styles will be changed when the supplied media query returns true. The style object can then be passed into the useResponsiveStyle hook which will update the style and re-render the component for any query that returns true.
 
 ### [Demo](https://dbuzzin.github.io/react-responsive-styles/demo01.html)
 
